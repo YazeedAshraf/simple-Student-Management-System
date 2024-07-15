@@ -1,0 +1,30 @@
+-- Create Students table
+CREATE TABLE Students (
+    StudentID NUMBER PRIMARY KEY,
+    FirstName VARCHAR2(50),
+    LastName VARCHAR2(50),
+    DateOfBirth DATE
+);
+
+-- Create Courses table
+CREATE TABLE Courses (
+    CourseID NUMBER PRIMARY KEY,
+    CourseName VARCHAR2(100)
+);
+
+-- Create Enrollments table
+CREATE TABLE Enrollments (
+    EnrollmentID NUMBER PRIMARY KEY,
+    StudentID NUMBER,
+    CourseID NUMBER,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+
+-- Create Grades table
+CREATE TABLE Grades (
+    GradeID NUMBER PRIMARY KEY,
+    EnrollmentID NUMBER,
+    Grade CHAR(1),
+    FOREIGN KEY (EnrollmentID) REFERENCES Enrollments(EnrollmentID)
+);
