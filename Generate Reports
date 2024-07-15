@@ -1,0 +1,22 @@
+CREATE OR REPLACE PROCEDURE GenerateStudentReport (
+    p_StudentID IN NUMBER
+) AS
+v_StudentName Students.FirstName%TYPE;
+BEGIN
+    SELECT FirstName INTO v_StudentName
+    FROM Students
+    WHERE StudentID = p_StudentID;
+
+    -- Output the student's name
+    DBMS_OUTPUT.PUT_LINE('Student Name: ' || v_StudentName);
+    FOR rec IN (
+        SELECT c.CourseID, c.CourseName, e.EnrollmentID, NVL(g.Grade, 'Not graded') AS Grade
+        FROM Courses c
+        JOIN Enrollments e ON c.CourseID = e.CourseID
+        LEFT JOIN Grades g ON e.EnrollmentID = g.EnrollmentID -- Corrected join condition
+        WHERE e.StudentID = p_StudentID
+    ) LOOP
+        DBMS_OUTPUT.PUT_LINE('Course ID: ' || rec.CourseID || ', Course Name: ' || rec.CourseName || ', Enrollment ID: ' || rec.EnrollmentID || ', Grade: ' || rec.Grade);
+    END LOOP;
+END;
+/
