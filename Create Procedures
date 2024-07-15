@@ -1,0 +1,55 @@
+--Add a Student
+CREATE OR REPLACE PROCEDURE AddStudent (
+    p_StudentID IN NUMBER,
+    p_FirstName IN VARCHAR2,
+    p_LastName IN VARCHAR2,
+    p_DateOfBirth IN DATE
+) AS
+BEGIN
+    INSERT INTO Students (StudentID, FirstName, LastName, DateOfBirth)
+    VALUES (p_StudentID, p_FirstName, p_LastName, p_DateOfBirth);
+END;
+/
+--Add a Course
+CREATE OR REPLACE PROCEDURE AddCourse (
+    p_CourseID IN NUMBER,
+    p_CourseName IN VARCHAR2
+) AS
+BEGIN
+    INSERT INTO Courses (CourseID, CourseName)
+    VALUES (p_CourseID, p_CourseName);
+END;
+/
+--Enroll a Student
+CREATE OR REPLACE PROCEDURE EnrollStudent (
+    p_EnrollmentID IN NUMBER,
+    p_StudentID IN NUMBER,
+    p_CourseID IN NUMBER
+) AS
+BEGIN
+    INSERT INTO Enrollments (EnrollmentID, StudentID, CourseID)
+    VALUES (p_EnrollmentID, p_StudentID, p_CourseID);
+END;
+/
+--Add a Grade
+CREATE OR REPLACE PROCEDURE AddGrade (
+    p_GradeID IN NUMBER,
+    p_EnrollmentID IN NUMBER,
+    p_Grade IN CHAR
+) AS
+BEGIN
+    INSERT INTO Grades (GradeID, EnrollmentID, Grade)
+    VALUES (p_GradeID, p_EnrollmentID, p_Grade);
+END;
+/
+--Update a Grade
+CREATE OR REPLACE PROCEDURE UpdateGrade (
+    p_EnrollmentID IN NUMBER,
+    p_Grade IN CHAR
+) AS
+BEGIN
+    UPDATE Grades
+    SET Grade = p_Grade
+    WHERE EnrollmentID = p_EnrollmentID;
+END;
+/
