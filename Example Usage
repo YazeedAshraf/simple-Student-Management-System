@@ -1,0 +1,27 @@
+BEGIN
+    -- Add students
+    AddStudent(1, 'John', 'Doe', TO_DATE('1995-04-23', 'YYYY-MM-DD'));
+    AddStudent(2, 'Jane', 'Smith', TO_DATE('1996-07-19', 'YYYY-MM-DD'));
+    
+    -- Add courses
+    AddCourse(1, 'Mathematics');
+    AddCourse(2, 'History');
+    
+    -- Enroll students
+    EnrollStudent(1, 1, 1); 
+    EnrollStudent(2, 1, 2); 
+    EnrollStudent(3, 2, 1); 
+    
+    -- Add grades
+    AddGrade(1, 1, 'A'); 
+    AddGrade(2, 2, 'B'); 
+    AddGrade(3, 3, 'A'); 
+    
+    -- Update a grade
+    UpdateGrade(2, 'A'); 
+    
+    -- Generate a student report
+    GenerateStudentReport(1); -- Report for John Doe
+    
+END;
+/
